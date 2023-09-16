@@ -16,7 +16,7 @@ export const TodoItem: React.FC<ITodoItem> = ({todoItem, onToggleActive}) => {
     }
 
     return (
-        <label onChange={handleCheck}>
+        <label style={{textDecoration: todoItem.isActive ? "line-through" : "none"}} onChange={handleCheck}>
             <input checked={isAcitve} type="checkbox"/>
             <span>{todoItem.name}
             </span>
