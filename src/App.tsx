@@ -1,5 +1,5 @@
 import logo from '/logo.png'
-import {TodoList} from "./components/TodoList";
+import {TodoList} from "./components/todoList/TodoList";
 import './style/style.sass'
 
 export const App = () => {

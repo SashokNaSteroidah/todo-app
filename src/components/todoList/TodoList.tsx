@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import {ITodo, TODO_DATA} from "../data/todo-data";
-import {TodoItem} from "./todoItem";
-import {TodoRemainder} from "./TodoRemainder";
+import React, {KeyboardEventHandler, useState} from "react";
+import {ITodo, TODO_DATA} from "../../data/todo-data";
+import {TodoItem} from "../todoItem/todoItem";
+import {TodoRemainder} from "../TodoRemainder";
+import styles from './todoListStyles.module.sass'
 
 const enum Filter {
     All = "all",
@@ -43,7 +44,7 @@ export const TodoList: React.FC = () => {
         setTodos(prevState => prevState.filter((todo => !todo.isActive)))
     }
 
-    const handleAdd = (event) => {
+    const handleAdd:KeyboardEventHandler<HTMLInputElement> = (event) => {
         if (event.key == 'Enter' && value != '') {
             setTodos(prevTodos => [...prevTodos, {id: todos.length + 1, name: value, isActive: false}]);
             setValue("");
@@ -52,21 +53,36 @@ export const TodoList: React.FC = () => {
 
     return (
         <>
-            <input onKeyDown={handleAdd} value={value} onChange={event => setValue(event.target.value)} type="text"/>
-            {filteredTodos.length == 0
-                ? <div>Не найдено значений</div>
-                : filteredTodos.map(todo =>
-                    <TodoItem key={todo.id} todoItem={todo} onToggleActive={handleToggleActive}/>
-                )}
-            <article >
+            <input className={styles.addInput}
+                   onKeyDown={handleAdd}
+                   value={value}
+                   onChange={event => setValue(event.target.value)}
+                   type="text"
+            />
+
+            <ul className={styles.todoItem}>
+                {filteredTodos.length == 0
+                    ? <div>Не найдено значений</div>
+                    : filteredTodos.map(todo =>
+                        <TodoItem key={todo.id}
+                                  todoItem={todo}
+                                  onToggleActive={handleToggleActive}
+                        />
+                    )}
+            </ul>
+
+            <article className={styles.remaining}>
+                <TodoRemainder remaining={todos.filter(item => !item.isActive).length}/>
+            </article>
+            <article className={styles.bottomMenu}>
                 <div>
                     <button onClick={() => setFilter(Filter.All)}>All</button>
                     <button onClick={() => setFilter(Filter.Done)}>Done</button>
                     <button onClick={() => setFilter(Filter.NotDone)}>Not Done</button>
                 </div>
-                <TodoRemainder remaining={todos.filter(item => !item.isActive).length}/>
-                <button onClick={handleDelete}>Удалить выполненные задачи</button>
+                <button className={styles.delete} onClick={handleDelete}>Clear completed</button>
             </article>
+
         </>
 
 
