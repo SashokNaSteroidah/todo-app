@@ -1,18 +1,49 @@
-.bottomMenu
+.topMenu
   display: flex
-
+  align-items: center
+  justify-content: space-between
+  button
+    background: #45ADF0
+    border: 1px solid #45ADF0
+    border-radius: 25px
+    padding: 10px 15px
+    color: white
+    transition: .2s
+    &:hover
+      transition: .2s
+      background: transparent
+      border: 1px solid white
 
 .addInput
-  border-radius: 10px
-  border: 1px solid white
+  border: 0
+  border-bottom: 1px solid white
+  outline: none
+  width: 85%
   font-size: 14px
   padding: 15px 15px
   background: transparent
   color: white
 
+.bottomMenu
+  display: flex
+  justify-content: space-between
+  div
+    button
+      border-radius: 25px
+      border: 1px solid white
+      background: transparent
+      padding: 10px 15px
+      color: white
+      outline: none
+      margin: 20px 0 0 0
+      transition: .2s
+      &:hover
+        transition: .2s
+        color: black
+        background: white
+
 .todoItem
-  border: 1px solid white
-  padding: 10px
+  padding: 10px 0
   color: white
   border-radius: 10px
   margin: 20px 0
@@ -20,7 +51,9 @@
 .remaining
   font-weight: bold
 
-button
+
+
+.delete
   border-radius: 25px
   border: 1px solid white
   background: transparent
@@ -30,17 +63,8 @@ button
   margin: 20px 0 0 0
   transition: .2s
   &:hover
-    transition: .2s
-    color: black
-    background: white
-
-
-.delete
-  background: red
-  transition: .2s
-  border: red 1px solid
-  &:hover
-    background: transparent
+    background: red
     color: white
-    border: 1px solid white
+    border: 1px solid red
     transition: .2s
+

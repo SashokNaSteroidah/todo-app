@@ -1,29 +1,36 @@
-import {ITodo} from "../../data/todo-data";
-import React, {useState} from "react";
-import styles from './todoItem.module.sass'
+import React, { useState } from "react";
+import styles from './todoItem.module.sass';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 interface ITodoItem {
-    todoItem: ITodo,
-    onToggleActive: (id:number) => void
+    todoItem: {
+        id: number;
+        name: string;
+        isActive: boolean;
+    };
+    onToggleActive: (id: number) => void;
 }
 
-export const TodoItem: React.FC<ITodoItem> = ({todoItem, onToggleActive}) => {
-
-    const [isAcitve, setActive] = useState(todoItem.isActive)
+export const TodoItem: React.FC<ITodoItem> = ({ todoItem, onToggleActive }) => {
+    const [isActive, setActive] = useState(todoItem.isActive);
 
     const handleCheck = () => {
-        setActive(!isAcitve)
-        onToggleActive(todoItem.id)
-    }
+        setActive(!isActive);
+        onToggleActive(todoItem.id);
+    };
 
     return (
-        <li className={styles.todoItem}>
-            <label style={{textDecoration: todoItem.isActive ? "line-through" : "none"}} onChange={handleCheck}>
-                <input checked={isAcitve} type="checkbox"/>
-                <span>{todoItem.name}
-            </span>
+        <li className={`${styles.todoItem} ${styles.customCheckbox}`}>
+            <label className={isActive ? styles.checked : ""}>
+                {isActive && <FontAwesomeIcon icon={faCheck} />}
+                <input
+                    type="checkbox"
+                    defaultChecked={isActive}
+                    onClick={handleCheck}
+                />
+                <span>{todoItem.name}</span>
             </label>
         </li>
-    )
+    );
 };
-

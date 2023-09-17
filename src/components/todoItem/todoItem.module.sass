@@ -1,5 +1,40 @@
 .todoItem
   border-bottom: 1px solid white
   padding: 20px 0
-.todoItem:last-of-type
-  border-bottom: 0
+  span
+    padding: 0 0 0 10px
+    font-size: 16px
+  svg
+    position: absolute
+    left: 4px
+    top: 2px
+    width: 12px
+  input
+    display: none
+
+  &:last-of-type
+    border-bottom: 0
+
+.customCheckbox
+  @extend .todoItem
+
+  label
+    display: inline-block
+    position: relative
+    padding-left: 25px
+    cursor: pointer
+
+    &:before
+      content: ""
+      display: inline-block
+      position: absolute
+      left: 0
+      top: 0
+      width: 20px
+      height: 20px
+      border: 2px solid #ccc
+      background-color: transparent
+      border-radius: 50%
+
+.checked
+  text-decoration: line-through
