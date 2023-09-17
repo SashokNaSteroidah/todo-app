@@ -13,7 +13,7 @@ const enum Filter {
 export const TodoList: React.FC = () => {
 
     useEffect(() => {
-        const data: string = localStorage.getItem('data');
+        const data: string | null = localStorage.getItem('data');
         if (data != null) setTodos(JSON.parse(data));
         else localStorage.setItem("data", JSON.stringify(TODO_DATA));
     }, [])
